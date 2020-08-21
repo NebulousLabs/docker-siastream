@@ -27,7 +27,7 @@ fi
 # Use the `cat` utility in order assign a multi-line string to a variable.
 SIASTREAM_CMD=$(
   cat <<-END
-./siastream \
+siastream \
   --siad-dir /sia \
   --siastream-dir /sia/data \
   --host 0.0.0.0
