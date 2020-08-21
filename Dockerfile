@@ -1,22 +1,12 @@
-FROM node:12.18 AS builder
+FROM node:14.8.0-stretch-slim
 
-RUN git clone https://gitlab.com/NebulousLabs/siastream.git && \
-    cd siastream && \
-    yarn && \
-    yarn build && \
-    yarn package linux
-
-FROM debian:stretch-slim
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 LABEL autoheal=true
 
-WORKDIR /siastream
+RUN apt-get update && apt-get install -y fuse
+RUN npm install -g siastream
 
-COPY --from=builder /siastream/dist/siastream-linux-x64/ ./
 COPY run.sh .
-
-RUN apt-get update && apt-get install -y fuse && \
-    chmod +x ./siastream
 
 ARG EXT_SIAD_HOST=""
 ARG EXT_SIAD_PORT=""
