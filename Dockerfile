@@ -3,7 +3,7 @@ FROM node:14.8.0-stretch-slim
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 LABEL autoheal=true
 
-RUN apt-get update && apt-get install -y fuse
+RUN apt-get update -qq && apt-get install -qq fuse
 RUN npm install -g siastream
 
 COPY run.sh .
